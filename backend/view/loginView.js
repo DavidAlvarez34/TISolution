@@ -1,5 +1,5 @@
 const loginController = require('../controller/loginController');
-const midd = require('../middlewares/user')
+const midd = require('../midd/user')
 const userService = require('../services/user')
 module.exports = async (app) => {
     app.get('/', (req, res) => {
