@@ -1,16 +1,32 @@
 const express = require('express');
 const cors = require('cors');
-const sequileze=require('./db/connection')
+
+
+const path = require('path');
+const sequileze=require('./db/connection');
 const loginView = require('./view/loginView');
+const registerView=require('./view/registerView')
+const butsgetsView=require('./view/butgetsView')
+const butsgetsNewView=require('./view/newButgetsView')
+const statesResultsView=require('./view/statesResultsView');
+const cashFlowView=require('./view/cashFlowView');
+const newCashView=require('./view/newCashView');
 require('dotenv').config();
 const app =express();//instanciar express
+//Initializar passport  es un middleware de autenticación 
+
+
 app.use(express.json());
 app.use(cors());
 
+app.use('/layoutViews',express.static(path.join(__dirname,'layoutViews')));
+app.use('/assets',express.static(path.join(__dirname,'layoutViews/img')))
+app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/public'));
-app.set('view engine','ejs');
-app.set('views', __dirname + '/views');
+app.use(express.urlencoded({ extended: false }));
+
+//app.set('views',path.join(__dirname,'views'));//une las vistas 
+
 const serverStart= async()=>{
     try {
        await sequileze.authenticate();
@@ -24,3 +40,9 @@ const serverStart= async()=>{
 }
 serverStart();
 loginView(app);
+registerView(app);
+butsgetsView(app);
+butsgetsNewView(app);
+statesResultsView(app);
+cashFlowView(app);
+newCashView(app);
