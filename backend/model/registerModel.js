@@ -5,9 +5,14 @@ module.exports = class loginModel {
         this.login = login;
     }
     async create (theUser){
-        let result = await sequelize.query("INSERT INTO usuario (nombre,apellido,email,userPasword) VALUES ('" + theUser.myName + "','" + theUser.lastName + "','" + theUser.email + "','" + theUser.itemPassword + "');");
+        try {
+            let result = await sequelize.query("INSERT INTO userTiBudget (emailUser,userPassword ) VALUES ('" + theUser.myEmail + "','" + theUser.myPassword + "');");
         console.log(result);
-        return result;
+        return result ;
+        } catch (error) {
+            return "error usuario ya registrado o te falto campos"
+        }
+        
     }
     async list (){
         let result = await sequelize.query("SELECT * FROM usuario");
@@ -19,9 +24,9 @@ module.exports = class loginModel {
     }
 
     async update (updateAPassword){
-       
-        let result = await sequelize.query("UPDATE userTiBudget SET userPassword = '" + updateAPassword.typePasswordUpdate+"'"+ " WHERE emailUser = '" + updateAPassword.typeEmailX + "' AND userPassword = '"+ updateAPassword.typePasswordX + "'");
-       
+        console.log(updateAPassword.paswordChange);
+        let result = await sequelize.query("UPDATE userTiBudget SET userPassword = '" + updateAPassword.paswordChange+"'"+ " WHERE emailUser = '" + updateAPassword.email + "' AND userPassword = '"+ updateAPassword.paswordCurrent + "'");
+        console.log(result);
         return result;
     }
     async delete (loginId){
@@ -30,7 +35,7 @@ module.exports = class loginModel {
     }
 
     async findToken (user){
-        let result = await sequelize.query("SELECT emailUser FROM userTiBudget WHERE emailUser = '" + user.emailLogin + "' AND userPassword = '" + user.emailpass + "'");
+        let result = await sequelize.query("SELECT emailUser FROM userTiBudget WHERE emailUser = '" + user.email + "' AND userPassword = '" + user.userPasword + "'");
         console.log(result);
         if (result[0].length > 0) {
           return true
