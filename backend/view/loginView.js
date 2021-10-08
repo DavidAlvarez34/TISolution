@@ -1,6 +1,6 @@
 const loginController = require('../controller/loginController');
-
 const midd = require('../middlewares/user')
+const userService = require('../services/user')
 module.exports = async (app) => {
     app.get('/', (req, res) => {
         res.render('index.ejs'/*, { name: req.user.name }*/)
@@ -24,7 +24,7 @@ module.exports = async (app) => {
             myName:'Juan'
         }
         let token = await loginController.login(user);
-    
+        let thisToken = await userService.tokenGeneration(user.user)
         if(token){
             res.redirect('/ti');
            
