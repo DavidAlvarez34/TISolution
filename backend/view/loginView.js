@@ -9,13 +9,14 @@ module.exports = async (app) => {
   app.post("/login", async (req, res) => {
     try {
       let userLogin = req.body;
-      //res.send(await loginController.login(user));
       let resultToken = await loginController.login(userLogin);
-      //res.json({data:result})
-      console.log("Arregando errores del token", resultToken);
-      res.render("ti.ejs", { data: resultToken });
+      if (resultToken) {
+        console.log("Arregando errores del token", resultToken);
+        return res.send({ data: resultToken });
+      }
+      res.status(402).send("Unregistered user");
     } catch (err) {
-      console.log("error");
+      console.log("error el usuario no ha sido autenticado");
       res.status(402).send("Unregistered user");
     }
   });

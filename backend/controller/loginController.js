@@ -9,7 +9,7 @@ module.exports.login = async (user) => {
     let token = jwt.sign({ data }, process.env.SECRET_KEY); // se agrega el usiario en corchetes para hacerlo como objeto
     return token;
   } else {
-    return "User no autenticado";
+    return false;
   }
 };
 module.exports.updatePass = async (user) => {
