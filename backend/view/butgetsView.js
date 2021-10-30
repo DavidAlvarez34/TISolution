@@ -1,6 +1,7 @@
 const butgetsController = require("../controller/butgetsController");
+const autenticationUser = require("../midd/autentication");
 module.exports = async (app) => {
-  app.post("/ti", async (req, res) => {
+  app.post("/ti", autenticationUser.userAutentication, async (req, res) => {
     try {
       let result = await butgetsController.showwBitgets();
       //console.log(result);
