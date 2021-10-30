@@ -1,4 +1,5 @@
 let idStatedRes = 0;
+let token;
 const valueId = async (valor) => {
   idStatedRes = valor;
   console.log("valor del id: ", idStatedRes);
@@ -6,6 +7,7 @@ const valueId = async (valor) => {
 const showStatedsResult = async () => {
   const HTMLResponse = document.querySelector(".viewStatedResult");
   const sendEmail = sessionStorage.getItem("emailUser");
+  token = localStorage.getItem("myData");
   if (sendEmail == null) {
     alert("Debes logearte");
     window.location = "./index.html";
@@ -13,13 +15,13 @@ const showStatedsResult = async () => {
   let data = {
     email: sendEmail,
   };
-  console.log("My email", sendEmail);
+
   let url = await fetch("http://localhost:3000/newButgets", {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(data),
   });

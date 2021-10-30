@@ -6,10 +6,8 @@ const sequileze = require("./db/connection");
 const loginView = require("./view/loginView");
 const registerView = require("./view/registerView");
 const butsgetsView = require("./view/butgetsView");
-const butsgetsNewView = require("./view/newButgetsView");
 const statesResultsView = require("./view/statesResultsView");
-const cashFlowView = require("./view/cashFlowView");
-const newCashView = require("./view/newCashView");
+
 require("dotenv").config();
 const app = express(); //instanciar express
 //Initializar passport  es un middleware de autenticación
@@ -45,7 +43,4 @@ serverStart();
 loginView(app);
 registerView(app);
 butsgetsView(app);
-butsgetsNewView(app);
 statesResultsView(app);
-cashFlowView(app);
-newCashView(app);

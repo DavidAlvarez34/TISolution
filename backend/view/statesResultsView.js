@@ -1,15 +1,20 @@
 const statesResultsController = require("../controller/statesResultsController");
+const autenticationUser = require("../midd/autentication");
 module.exports = async (app) => {
-  app.post("/newButgets", async (req, res) => {
-    try {
-      let result = await statesResultsController.showStatedResult();
-      //console.log("Ruta de estados de resultados: ", result);
+  app.post(
+    "/newButgets",
+    autenticationUser.userAutentication,
+    async (req, res) => {
+      try {
+        let result = await statesResultsController.showStatedResult();
+        //console.log("Ruta de estados de resultados: ", result);
 
-      res.send({ viewStatedRes: result });
-    } catch (error) {
-      res.status(402).send("Error dates");
+        res.send({ viewStatedRes: result });
+      } catch (error) {
+        res.status(402).send("Error dates");
+      }
     }
-  });
+  );
 
   app.get("/deleteStated/:id", async (req, res) => {
     try {

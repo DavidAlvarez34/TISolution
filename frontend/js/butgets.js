@@ -1,6 +1,7 @@
 let idButget;
+let token;
 const showButget = async () => {
-  let token = localStorage.getItem("myData");
+  token = localStorage.getItem("myData");
   console.log("El token ", token);
   const HTMLResponse = document.querySelector(".viewButget");
   const sendEmail = sessionStorage.getItem("emailUser");
@@ -120,7 +121,9 @@ const deleteButgets = async () => {
 };
 
 const stopSesion = () => {
+  token = "";
   localStorage.removeItem("myData");
   sessionStorage.removeItem("emailUser");
+
   window.location = "./index.html";
 };
