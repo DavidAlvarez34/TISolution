@@ -27,8 +27,7 @@ CREATE TABLE statesResults(
     FinalBalnce FLOAT
 );
 INSERT INTO statesResults(sales,costs,margin,FinalBalnce) VALUES (234,150.34,5643,5435);
-
-
+SELECT * FROM statesResults;
 --Flujo de efectivo
 CREATE TABLE cashFlow(
     idCar INT NOT NULL IDENTITY(1,1) PRIMARY KEY,

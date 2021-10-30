@@ -24,7 +24,7 @@ module.exports = class loginModel {
     return result[0];
   }
   async findUser(login) {
-    let user = [login.emailUserTi, login.passwordUserTi];
+    let user = [login.email, login.userPasword];
     console.log("Hola desde model: ", login);
     let result = await sequelize.query(
       "SELECT emailUser FROM userTiBudget WHERE emailUser = '" +
