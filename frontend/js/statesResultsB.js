@@ -136,3 +136,8 @@ function refrest() {
   console.log("Hola que tal mexico df");
   window.location.reload();
 }
+const stopSesion = () => {
+  localStorage.removeItem("myData");
+  sessionStorage.removeItem("emailUser");
+  window.location = "./index.html";
+};

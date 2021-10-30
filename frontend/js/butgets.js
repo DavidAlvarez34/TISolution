@@ -1,5 +1,7 @@
 let idButget;
 const showButget = async () => {
+  let token = localStorage.getItem("myData");
+  console.log("El token ", token);
   const HTMLResponse = document.querySelector(".viewButget");
   const sendEmail = sessionStorage.getItem("emailUser");
   if (sendEmail == null) {
@@ -15,7 +17,7 @@ const showButget = async () => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(data),
   });
@@ -115,4 +117,10 @@ const deleteButgets = async () => {
     },
   });
   location.reload(); //cargar la paginba
+};
+
+const stopSesion = () => {
+  localStorage.removeItem("myData");
+  sessionStorage.removeItem("emailUser");
+  window.location = "./index.html";
 };
